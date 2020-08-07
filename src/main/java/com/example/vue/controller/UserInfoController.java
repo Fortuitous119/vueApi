@@ -33,14 +33,14 @@ public class UserInfoController {
 	 * @throws ParseException 
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/getUserInfo", produces = {"application/json;charset=UTF-8"})
-	public BaseResponse <List<UserInfoVo>> getUserInfo(@RequestParam("userId") String userId)
+	@RequestMapping(value = "/getUserInfo")
+	public BaseResponse <List<UserInfoVo>> getUserInfo(@RequestParam("employeeId") String employeeId)
 			throws ParseException{
 		List<UserInfoVo> userInfo = new ArrayList<UserInfoVo>();
 
 		try {	
 			// 查询显示内容
-			userInfo = userInfoService.getUserInfoVo(userId);
+			userInfo = userInfoService.getUserInfoVo(employeeId);
 		}catch(Exception e) {
 			return ResponseUtil.error(2, e.getMessage());
 		}

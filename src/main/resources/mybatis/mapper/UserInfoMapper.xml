@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vue.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.vue.entity.UserInfo">
+    <id column="employee_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="english_Name" jdbcType="VARCHAR" property="englishName" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="duty" jdbcType="VARCHAR" property="duty" />
+    <result column="secretary" jdbcType="VARCHAR" property="secretary" />
+    <result column="office_Tel" jdbcType="VARCHAR" property="officeTel" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employee_ID, name, phone, department, sex, english_Name, email, duty, secretary, 
+    office_Tel, address, memo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where employee_ID = #{employeeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from userinfo
+    where employee_ID = #{employeeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.vue.entity.UserInfo">
+    insert into userinfo (employee_ID, name, phone, 
+      department, sex, english_Name, 
+      email, duty, secretary, 
+      office_Tel, address, memo
+      )
+    values (#{employeeId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{englishName,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR}, #{secretary,jdbcType=VARCHAR}, 
+      #{officeTel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.vue.entity.UserInfo">
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        employee_ID,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="englishName != null">
+        english_Name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+      <if test="secretary != null">
+        secretary,
+      </if>
+      <if test="officeTel != null">
+        office_Tel,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="englishName != null">
+        #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="secretary != null">
+        #{secretary,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null">
+        #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.vue.entity.UserInfo">
+    update userinfo
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="englishName != null">
+        english_Name = #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="secretary != null">
+        secretary = #{secretary,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null">
+        office_Tel = #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where employee_ID = #{employeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.vue.entity.UserInfo">
+    update userinfo
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      english_Name = #{englishName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      secretary = #{secretary,jdbcType=VARCHAR},
+      office_Tel = #{officeTel,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR}
+    where employee_ID = #{employeeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

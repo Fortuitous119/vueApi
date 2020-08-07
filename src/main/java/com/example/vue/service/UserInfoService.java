@@ -9,7 +9,7 @@ import com.example.vue.vo.UserInfoVo;
  */
 public interface UserInfoService {
 
-	List<UserInfoVo> getUserInfoVo(String userId);
+	List<UserInfoVo> getUserInfoVo(String employeeId);
 
 }
 
