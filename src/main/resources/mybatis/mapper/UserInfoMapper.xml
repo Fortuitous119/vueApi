@@ -5,7 +5,8 @@
     <id column="employee_ID" jdbcType="VARCHAR" property="employeeId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="department" jdbcType="VARCHAR" property="departmentId" />
+    <result column="departmentName" jdbcType="VARCHAR" property="departmentName" />
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="english_Name" jdbcType="VARCHAR" property="englishName" />
     <result column="email" jdbcType="VARCHAR" property="email" />
@@ -21,9 +22,12 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from userinfo
-    where employee_ID = #{employeeId,jdbcType=VARCHAR}
+     user.*, dept.departmentName
+    from userinfo user left outer join departinfo dept on dept.departmentId = user.department
+    where 1=1
+    <if test="_parameter != null and _parameter != ''">
+       and user.employee_ID = #{employeeId,jdbcType=VARCHAR}
+    </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from userinfo

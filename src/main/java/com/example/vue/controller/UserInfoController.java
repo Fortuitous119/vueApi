@@ -1,10 +1,13 @@
 package com.example.vue.controller;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +30,8 @@ public class UserInfoController {
 	private UserInfoService userInfoService;
 
 	/**
-	 * 根据部门取得画面显示内容
-	 * @param String 登录者ID，审批编号
+	 * 查询信息
+	 * @param String employeeId 员工ID
 	 * @return BaseResponse
 	 * @throws ParseException 
 	 */
@@ -45,5 +48,44 @@ public class UserInfoController {
 			return ResponseUtil.error(2, e.getMessage());
 		}
 		return ResponseUtil.success(userInfo);
+	}
+	
+	/**
+	 * 删除信息
+	 * @param String employeeId 员工ID
+	 * @return BaseResponse
+	 * @throws ParseException 
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/del")
+	public BaseResponse<Integer> del(@RequestParam("employeeId") String employeeId)
+			throws ParseException{
+		Integer result = 0;
+		try {
+			result = userInfoService.del(employeeId);
+		} catch (SQLException e) {
+			return ResponseUtil.error(2, e.getMessage());
+		}
+		return ResponseUtil.success(result);
+	}
+	
+	/**
+	 * 插入信息
+	 * @param params
+	 * @return
+	 * @throws ParseException
+	 */
+	@SuppressWarnings("unchecked")
+	@PostMapping(value = "/ins", produces = {"application/json;charset=UTF-8"})
+	public BaseResponse<Integer> insFinishQuantitiesList(@RequestBody UserInfoVo params)
+			throws ParseException{
+
+		Integer result = 0;
+		try {
+			result = userInfoService.ins(params);
+		} catch (SQLException e) {
+			return ResponseUtil.error(2, e.getMessage());
+		}
+		return ResponseUtil.success(result);
 	}
 }

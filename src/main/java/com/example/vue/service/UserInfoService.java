@@ -1,5 +1,6 @@
 package com.example.vue.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.example.vue.vo.UserInfoVo;
@@ -9,7 +10,11 @@ import com.example.vue.vo.UserInfoVo;
  */
 public interface UserInfoService {
 
-	List<UserInfoVo> getUserInfoVo(String employeeId);
+	List<UserInfoVo> getUserInfoVo(String employeeId) throws SQLException;
+	
+	Integer del(String employeeId) throws SQLException;
+	
+	Integer ins(UserInfoVo userInfo) throws SQLException;
 
 }
 

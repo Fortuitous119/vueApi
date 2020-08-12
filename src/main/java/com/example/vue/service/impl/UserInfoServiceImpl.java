@@ -1,5 +1,6 @@
 package com.example.vue.service.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	private UserInfoMapper userInfoMapper;
 	
 	@Override
-	public List<UserInfoVo> getUserInfoVo(String employeeid) {
+	public List<UserInfoVo> getUserInfoVo(String employeeid) throws SQLException{
 		List<UserInfoVo> lstUserInfoVo = new ArrayList<UserInfoVo>();
 		
 		List<UserInfo> lstuserInfo= userInfoMapper.selectByPrimaryKey(employeeid);
@@ -35,5 +36,18 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 		
 		return lstUserInfoVo;
+	}
+	
+	@Override
+	public Integer del(String employeeid) throws SQLException{
+		return userInfoMapper.deleteByPrimaryKey(employeeid);
+	}
+	
+	@Override
+	public Integer ins(UserInfoVo userInfo) throws SQLException{
+		UserInfo record = new UserInfo();
+		
+		BeanUtils.copyProperties(userInfo, record);
+		return userInfoMapper.insertSelective(record);
 	}
 }

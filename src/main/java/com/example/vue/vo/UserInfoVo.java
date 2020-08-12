@@ -1,13 +1,14 @@
 package com.example.vue.vo;
 
-import lombok.Data;;
+import lombok.Data;
 
 @Data
 public class UserInfoVo {
     private String name;
     private String phone;
     private String phonePre;
-    private String department;
+    private String departmentId;
+    private String departmentName;
     private String employeeId;
     private Integer sex;
     private String englishName;
